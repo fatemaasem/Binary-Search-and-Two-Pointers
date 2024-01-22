@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+ 
+using namespace std;
+ 
+using ll = long long;
+ 
+const int N = 100005;
+ 
+int n, k, a[N], b[N];
+ 
+bool check(ll mx) {
+    ll t = k;
+    for (int i = 0; i < n; ++i) {
+        t -= max(0ll, 1ll * a[i] * mx - b[i]);
+        if (t < 0)
+            return false;
+    }
+    return true;
+}
+ 
+int main() {
+    cin >> n >> k;
+    for (int i = 0; i < n; ++i)
+        cin >> a[i];
+    for (int i = 0; i < n; ++i)
+        cin >> b[i];
+    ll ans = 0;
+    ll l = 0, r = 2e9;
+    while (l <= r) {
+        ll m = (l + r) / 2;
+        if (check(m)) {
+            ans = m;
+            l = m + 1;
+        } else
+            r = m - 1;
+    }
+    cout << ans << '\n';
+    return 0;
+}
+C++
