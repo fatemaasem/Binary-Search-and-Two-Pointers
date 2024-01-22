@@ -1,0 +1,48 @@
+
+#include <iostream>
+#include <queue>
+#include <stack>
+#include <algorithm>
+#include<cstdio>
+#include<vector>
+#include<set>
+#include<map>
+#include<string>
+#include<cmath>
+#define ll long long
+
+using namespace std;
+const int N = 200005;
+
+int a[N];
+
+
+
+int main() {
+int t;
+cin>>t;
+while(t--){
+	int n,k;
+	cin>>n>>k;
+	vector<ll>v(n);
+	ll ar[n+1];
+	for(int i=0;i<n;i++)
+	cin>>v[i];
+	ar[0]=0;
+	
+	for(int i=1;i<=n;i++)
+	ar[i]=ar[i-1]+v[i-1];
+//cout<<ar[0]<<" ";
+	for(int i=n;i>1;i--){
+		ll x=ar[i-1];
+		ll need=(v[i-1]*100+k-1)/k;
+		if((x+ar[0])<need){
+			ar[0]+=(need-(x+ar[0]));
+		//	cout<<ar[0]<<" ";
+		}
+	}
+	cout<<ar[0]<<"\n";
+}
+
+
+}
