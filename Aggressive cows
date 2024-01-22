@@ -1,0 +1,53 @@
+#include<iostream>
+#include<algorithm>
+#include<math.h>
+#include<stack>
+#include<vector>
+#include<map>
+#include<set>
+using namespace std;
+bool fun(set<int>s, int mid, int c) {
+	long long sum = *s.begin();
+	int t = 1;
+	while (t < c) {
+		if (s.lower_bound(sum + mid) != s.end()) {
+			sum = *s.lower_bound(sum + mid);
+			t++;
+		}
+		else {
+			return false;
+		}
+	}
+	return true;
+}
+int main() {
+	int t;
+	cin >> t;
+	while (t--) {
+		int n, c;
+		cin >> n >> c;
+		set<int>s;
+		for (int i = 0; i < n; i++) {
+			int x;
+			cin >> x;
+			s.insert(x);
+		}
+		if (s.size() == 1 || (s.size() == 2 && n > 2)) {
+			cout << "0\n";
+		}
+		int ans = 0;
+	int ss = 0, e = 1e6;
+	while (ss <= e) {
+		int mid = (ss + e) / 2;
+		if (fun(s, mid,c)) {
+			ss = mid + 1;
+			ans = mid;
+		}
+		else {
+			e = mid - 1;
+		}
+	}
+	cout << ans << "\n";
+}
+return 0;
+}
