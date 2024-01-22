@@ -1,0 +1,50 @@
+#include<iostream>
+#include<algorithm>
+#include<math.h>
+#include<stack>
+#include<vector>
+#include<map>
+#include<set>
+using namespace std ;
+bool val(int mid,vector<int>v,int k){
+	int kk=1;
+	int ans=v[0]+mid-1;
+	while(true){
+		int y=upper_bound(v.begin(),v.end(),ans)-v.begin();
+		if(y==v.size())break;
+		ans=v[y]+mid-1;
+		kk++;
+	//	cout<<k<<"\n";
+		if(kk>k)break;
+	}
+	if(kk<=k)return true;
+	else
+	return false;
+}
+
+int main(){
+	int t;
+	cin>>t;
+	while(t--){
+	int n,k;
+	cin>>n>>k;
+	vector<int>v(n);
+	for(int i=0;i<n;i++){
+		cin>>v[i];
+	}
+
+int s=1,e=1e9;
+int ans=0;
+while(s<=e){
+	int mid=(s+e)/2;
+	if(val(mid,v,k)){
+		e=mid-1;
+		ans=mid;
+	}
+	else{
+		s=mid+1;
+	}
+}
+cout<<ans<<"\n";
+
+}}
